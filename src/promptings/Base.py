@@ -8,6 +8,7 @@ from models.Base import BaseModel
 from datasets.Dataset import Dataset
 from results.Results import Results
 from utils.parse import parse_response
+from utils.token_count import calculate_openai_cost
 
 
 class BaseStrategy(object):
@@ -88,6 +89,7 @@ class BaseStrategy(object):
                 #     try:
                 response, prompt_tokens, completion_tokens = self.run_single_pass(
                     item)
+                _ = calculate_openai_cost(prompt_tokens, completion_tokens)
                 #     break
                 # except Exception as e:
                 #     time.sleep(5)
